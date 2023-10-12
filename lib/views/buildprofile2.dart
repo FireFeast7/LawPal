@@ -1,5 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lawpal/controller/textController.dart';
+import 'package:lawpal/views/buildprofile1.dart';
+import 'package:lawpal/views/buildprofile3.dart';
 
 class BuildProfile2 extends StatelessWidget {
   final textController controller = textController();
@@ -12,7 +16,11 @@ class BuildProfile2 extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Law Pal'),
-        leading: IconButton(onPressed: () {}, icon: Icon(Icons.arrow_back)),
+        leading: IconButton(
+            onPressed: () {
+              Get.to(() => BuildProfile1());
+            },
+            icon: Icon(Icons.arrow_back)),
       ),
       body: Column(
         children: [
@@ -51,7 +59,6 @@ class BuildProfile2 extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextFormField(
-                    controller: controller.practice.value,
                     decoration: const InputDecoration(
                       hintText: 'Enter Practice Name',
                     ),
@@ -61,6 +68,9 @@ class BuildProfile2 extends StatelessWidget {
                       }
                       return null;
                     },
+                    onSaved: (value) {
+                      controller.practice.value= value!;
+                    },
                   ),
                   const SizedBox(height: 25.0),
                   const Text(
@@ -68,7 +78,6 @@ class BuildProfile2 extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                   TextFormField(
-                    controller: controller.bar_association.value,
                     decoration: const InputDecoration(
                       hintText: 'Enter Bar Association Number',
                     ),
@@ -77,6 +86,9 @@ class BuildProfile2 extends StatelessWidget {
                         return 'Bar Association Number is required';
                       }
                       return null;
+                    },
+                    onSaved: (value) {
+                      controller.bar_association.value = value!;
                     },
                   ),
                   const SizedBox(height: 25.0),
@@ -110,19 +122,33 @@ class BuildProfile2 extends StatelessWidget {
                         SizedBox(
                           width: 30,
                         ),
-                        Text("Upload Your Certificate"),
+                        Obx(
+                          () => RichText(
+                            text: TextSpan(
+                              text: controller.certificate.value
+                                  ? "Uploaded Successfully ✅.\n Click to Select Again "
+                                  : "Upload Your Certificate",
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  controller.uploadCertificate();
+                                },
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
                   const SizedBox(height: 25.0),
                   ElevatedButton(
                     onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        // All required fields are filled, you can proceed
-                        // Add your logic here
+                      if (_formKey.currentState!.validate()
+                          // && controller.certificate.value != false
+                          ) {
+                        Get.off(() => BuildProfile3());
                       }
                     },
-                    child: const Text('Submit'),
+                    child: const Text('Next'),
                   ),
                 ],
               ),

@@ -1,3 +1,6 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lawpal/controller/textController.dart';
@@ -23,8 +26,9 @@ class _BuildProfile1State extends State<BuildProfile1> {
 
   @override
   Widget build(BuildContext context) {
-    final bool isBothFieldsNotEmpty = controller.location.value.text.isNotEmpty &&
-        controller.description.value.text.isNotEmpty;
+    final bool isBothFieldsNotEmpty =
+        controller.location.value.text.isNotEmpty &&
+            controller.description.value.text.isNotEmpty;
 
     final Color buttonColor = isBothFieldsNotEmpty ? Colors.blue : Colors.grey;
 
@@ -61,7 +65,7 @@ class _BuildProfile1State extends State<BuildProfile1> {
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.1,
             width: MediaQuery.of(context).size.height,
-            child: const Row(
+            child: Row(
               children: [
                 SizedBox(
                   width: 50,
@@ -73,7 +77,20 @@ class _BuildProfile1State extends State<BuildProfile1> {
                 SizedBox(
                   width: 15,
                 ),
-                Text("Upload Your Profile Picture"),
+                Obx(
+                  () => RichText(
+                    text: TextSpan(
+                      text: controller.imagepath.isEmpty
+                          ? "Upload Your Profile Picture"
+                          : "Uploaded Successfully ✅.\n Click to Select Again ",
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          controller.loadImage();
+                        },
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -173,12 +190,12 @@ class _BuildProfile1State extends State<BuildProfile1> {
                       Get.to(() => BuildProfile2());
                     }
                   },
-                  child: Text("Next"),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: buttonColor,
                     foregroundColor: Colors.black,
                     fixedSize: Size(150, 20),
                   ),
+                  child: Text("Next"),
                 ),
                 SizedBox(
                   width: 40,

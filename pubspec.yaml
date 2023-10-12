@@ -39,6 +39,9 @@ dependencies:
   textfield_tags: ^2.0.2
   choice: ^2.0.0
   get: ^4.6.6
+  image_picker: ^1.0.4
+  shared_preferences: ^2.2.1
+  file_picker: ^5.5.0
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +67,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/icon.png
+    - images/Group53.png
+    - images/Group54.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 

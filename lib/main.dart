@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lawpal/controller/textController.dart';
+import 'package:lawpal/views/Home%20Page/BottomNavBar.dart';
+import 'package:lawpal/views/Home%20Page/MainScreen.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 import 'package:choice/choice.dart';
 import 'package:get/get.dart';
@@ -20,7 +22,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: BuildProfile1(),
+      home: MainScreen(),
       debugShowCheckedModeBanner: false,
     );
   }

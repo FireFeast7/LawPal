@@ -4,7 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lawpal/controller/textController.dart';
-import 'package:lawpal/views/buildprofile2.dart';
+import 'package:lawpal/views/Profile%20Pages/buildprofile2.dart';
 
 class BuildProfile1 extends StatefulWidget {
   BuildProfile1({super.key});

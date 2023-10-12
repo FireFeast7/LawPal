@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -6,6 +8,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:file_picker/file_picker.dart';
 
+// ignore: camel_case_types
 class textController extends GetxController {
   var location = TextEditingController().obs;
   var description = TextEditingController().obs;
@@ -16,13 +19,13 @@ class textController extends GetxController {
   var selectedChoice = 'Individual'.obs;
   var imagepath = ''.obs;
   var certificate = false.obs;
-  var experience = ''.obs;
-  var education = ''.obs;
+  var experience = TextEditingController().obs;
+  var education = TextEditingController().obs;
   var orgname = ''.obs;
   var email = TextEditingController().obs;
   var password = TextEditingController().obs;
   var filled = false.obs;
-
+  var isLoaing = false.obs;
   final picker = ImagePicker();
   Future<void> loadImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
@@ -51,6 +54,25 @@ class textController extends GetxController {
     } else {
       Get.snackbar("", "Cancelled");
     }
+  }
+
+  Color check_color() {
+    if (selectedChoice.value == 'Organization') {
+      if (email.value.text.isNotEmpty &&
+          password.value.text.isNotEmpty &&
+          experience.value.text.isNotEmpty &&
+          education.value.text.isNotEmpty) {
+        filled.value = true;
+      }
+    } else if (selectedChoice.value == 'Individual') {
+      if (email.value.text.isNotEmpty &&
+          password.value.text.isNotEmpty &&
+          experience.value.text.isNotEmpty &&
+          education.value.text.isNotEmpty) {
+        filled.value = true;
+      }
+    } 
+    return filled.value ? Colors.white : Colors.grey;
   }
 
   @override

@@ -4,7 +4,7 @@ import 'package:textfield_tags/textfield_tags.dart';
 import 'package:choice/choice.dart';
 import 'package:get/get.dart';
 
-import 'views/buildprofile1.dart';
+import 'views/Profile Pages/buildprofile1.dart';
 
 void main() {
   runApp(MyApp());

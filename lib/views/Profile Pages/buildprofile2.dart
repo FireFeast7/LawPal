@@ -2,8 +2,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lawpal/controller/textController.dart';
-import 'package:lawpal/views/buildprofile1.dart';
-import 'package:lawpal/views/buildprofile3.dart';
+import 'package:lawpal/views/Profile%20Pages/buildprofile1.dart';
+import 'package:lawpal/views/Profile%20Pages/buildprofile3.dart';
 
 class BuildProfile2 extends StatelessWidget {
   final textController controller = textController();

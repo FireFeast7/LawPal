@@ -14,6 +14,7 @@ class BuildProfile1 extends StatefulWidget {
 }
 
 class _BuildProfile1State extends State<BuildProfile1> {
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
   final textController controller = Get.put(textController());
   String selectedoption = 'Option 1';
   void dropdownCallback(String? selectedvalue) {
@@ -130,7 +131,7 @@ class _BuildProfile1State extends State<BuildProfile1> {
           ),
           Container(
             width: MediaQuery.of(context).size.width * 0.8,
-            child: TextField(
+            child: TextFormField(
               controller: controller.location.value,
               decoration: InputDecoration(
                 icon: Icon(Icons.location_city),
@@ -162,7 +163,7 @@ class _BuildProfile1State extends State<BuildProfile1> {
                     ),
                   ),
                 ),
-                TextField(
+                TextFormField(
                   controller: controller.description.value,
                   maxLines: 7,
                   maxLength: 200,

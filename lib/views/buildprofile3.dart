@@ -1,20 +1,31 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lawpal/controller/textController.dart';
+import 'package:lawpal/views/buildprofile1.dart';
 import 'package:lawpal/views/buildprofile2.dart';
 
 class BuildProfile3 extends StatelessWidget {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final textController controller = Get.put(textController());
+
   BuildProfile3({super.key});
 
   @override
   Widget build(BuildContext context) {
+    if (controller.selectedChoice.value == 'Organization') {
+      if (controller.email.value.text.isNotEmpty &&
+          controller.password.value.text.isNotEmpty &&
+          controller.experience.value.isNotEmpty &&
+          controller.education.value.isNotEmpty) {
+        controller.filled.value = true;
+      }
+    }
+    final Color buttonColor =
+        controller.filled.value ? Colors.white : Colors.grey;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Law Pal'),
@@ -51,6 +62,8 @@ class BuildProfile3 extends StatelessWidget {
           ),
           Obx(
             () => Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black, width: 3)),
               height: MediaQuery.of(context).size.height * 0.50,
               width: MediaQuery.of(context).size.width,
               padding: EdgeInsets.all(25),
@@ -198,33 +211,19 @@ class BuildProfile3 extends StatelessWidget {
                               SizedBox(height: 16.0),
                               TextFormField(
                                 decoration: InputDecoration(
-                                  labelText: 'Organization Name*',
+                                  labelText: 'Organization Name',
                                 ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Name is required';
-                                  }
-                                  return null;
-                                },
+                                // validator: (value) {
+                                //   if (value!.isEmpty) {
+                                //     return 'Name is required';
+                                //   }
+                                //   return null;
+                                // },
                                 onSaved: (value) {
-                                  controller.education.value = value!;
+                                  controller.orgname.value = value!;
                                 },
                               ),
                               SizedBox(height: 16.0),
-                              TextFormField(
-                                decoration: InputDecoration(
-                                  labelText: 'Organization Name*',
-                                ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Name is required';
-                                  }
-                                  return null;
-                                },
-                                onSaved: (value) {
-                                  controller.education.value = value!;
-                                },
-                              ),
                               SizedBox(height: 16.0),
                             ],
                           ),
@@ -237,7 +236,7 @@ class BuildProfile3 extends StatelessWidget {
             height: 10,
           ),
           Container(
-            padding: EdgeInsets.all(20),
+            padding: EdgeInsets.all(10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -250,7 +249,7 @@ class BuildProfile3 extends StatelessWidget {
                             ? Colors.yellow
                             : Colors.grey,
                         height: 90,
-                        width: 140,
+                        width: 120,
                         child: Image.asset("images/Group53.png"),
                       ),
                     ),
@@ -282,7 +281,7 @@ class BuildProfile3 extends StatelessWidget {
                             ? Colors.yellow
                             : Colors.grey,
                         height: 90,
-                        width: 140,
+                        width: 120,
                         child: Image.asset("images/Group54.png"),
                       ),
                     ),
@@ -305,6 +304,29 @@ class BuildProfile3 extends StatelessWidget {
                     ),
                   ],
                 ),
+              ],
+            ),
+          ),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      Get.off(() => BuildProfile1());
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: buttonColor,
+                    foregroundColor: Colors.black,
+                    fixedSize: Size(150, 2),
+                  ),
+                  child: Text("Next"),
+                ),
+                SizedBox(
+                  width: 40,
+                )
               ],
             ),
           ),

@@ -13,13 +13,16 @@ class textController extends GetxController {
   var bar_association = ''.obs;
   var cases = TextEditingController().obs;
   var active_cases = TextEditingController().obs;
-  var selectedChoice = ''.obs;
+  var selectedChoice = 'Individual'.obs;
   var imagepath = ''.obs;
   var certificate = false.obs;
   var experience = ''.obs;
   var education = ''.obs;
+  var orgname = ''.obs;
   var email = TextEditingController().obs;
   var password = TextEditingController().obs;
+  var filled = false.obs;
+
   final picker = ImagePicker();
   Future<void> loadImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);

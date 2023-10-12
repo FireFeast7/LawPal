@@ -1,36 +1,41 @@
 import 'package:flutter/material.dart';
+import 'package:lawpal/views/Home%20Screens/Alerts.dart';
+import 'package:lawpal/views/Home%20Screens/Chats.dart';
+import 'package:lawpal/views/Home%20Screens/Contracts.dart';
+import 'package:lawpal/views/Home%20Page/MainScreen.dart';
+import 'package:lawpal/views/Home%20Screens/Requests.dart';
 
-class MyBottomNavigationBar extends StatefulWidget {
+class BottomNavigation extends StatefulWidget {
+  const BottomNavigation({super.key});
+
   @override
-  _MyBottomNavigationBarState createState() => _MyBottomNavigationBarState();
+  State<BottomNavigation> createState() => _BottomNavigationBarExampleState();
 }
 
-class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
-  int _currentIndex = 0;
-
-  final List<Widget> _pages = [
-    Center(child: Text('Jobs')),
-    Center(child: Text('Requests')),
-    Center(child: Text('Chat')),
-    Center(child: Text('Alerts')),
-    Center(child: Text('Contracts')),
+class _BottomNavigationBarExampleState extends State<BottomNavigation> {
+  int _selectedIndex = 0;
+  static List<Widget> _widgetOptions = <Widget>[
+    MainScreen(),
+    Requests(),
+    Contracts(),
+    Chats(),
+    Alerts()
   ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Bottom Navigation Bar Example'),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      body: _pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: (index) {
-          setState(() {
-            _currentIndex = index;
-          });
-        },
-        items: [
+        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.work),
             label: 'Jobs',
@@ -40,18 +45,23 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
             label: 'Requests',
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.assignment),
+            label: 'Contracts',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.chat),
-            label: 'Chat',
+            label: 'Chats',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.notifications),
             label: 'Alerts',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.assignment),
-            label: 'Contracts',
-          ),
+          )
         ],
+        currentIndex: _selectedIndex,
+        type: BottomNavigationBarType.fixed,
+        unselectedItemColor: Colors.grey,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
       ),
     );
   }

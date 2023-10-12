@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:lawpal/views/Home%20Page/BottomNavBar.dart';
-import 'package:lawpal/views/Home%20Page/profile.dart';
+import 'package:lawpal/models/profile.dart';
 
 class MainScreen extends StatelessWidget {
   final List<Profile> profiles = [
@@ -92,32 +92,30 @@ class MainScreen extends StatelessWidget {
               ],
             ),
             Container(
-              child: Expanded(
-                child: TabBarView(
-                  children: [
-                    ListView.builder(
-                      itemCount: profiles.length,
-                      itemBuilder: (context, index) {
-                        return CardWithProfile(
-                          profile: profiles[index],
-                        );
-                      },
-                    ),
-                    ListView.builder(
-                      itemCount: profiles.length,
-                      itemBuilder: (context, index) {
-                        return CardWithProfile(
-                          profile: profiles[index],
-                        );
-                      },
-                    ),
-                  ],
-                ),
+              height: MediaQuery.of(context).size.height * 0.45,
+              child: TabBarView(
+                children: [
+                  ListView.builder(
+                    itemCount: profiles.length,
+                    itemBuilder: (context, index) {
+                      return CardWithProfile(
+                        profile: profiles[index],
+                      );
+                    },
+                  ),
+                  ListView.builder(
+                    itemCount: profiles.length,
+                    itemBuilder: (context, index) {
+                      return CardWithProfile(
+                        profile: profiles[index],
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
           ],
         ),
-        bottomNavigationBar: MyBottomNavigationBar(),
       ),
     );
   }
@@ -166,8 +164,7 @@ class CardWithProfile extends StatelessWidget {
         title: Text(profile.name),
         subtitle: Text(profile.info),
         trailing: ElevatedButton(
-          onPressed: () {
-          },
+          onPressed: () {},
           child: Text('Accept'),
         ),
       ),

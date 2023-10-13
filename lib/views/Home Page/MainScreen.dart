@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:lawpal/views/Home%20Page/BottomNavBar.dart';
 import 'package:lawpal/models/profile.dart';
+import 'package:lawpal/views/Home%20Page/Drawer.dart';
 
 class MainScreen extends StatelessWidget {
   final List<Profile> profiles = [
@@ -62,7 +63,7 @@ class MainScreen extends StatelessWidget {
             },
           ),
         ),
-        drawer: Drawer(),
+        drawer: AppDrawer(),
         body: Column(
           children: [
             Container(
